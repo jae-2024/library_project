@@ -15,15 +15,15 @@ public class UserRepository {
     @PersistenceContext
     private final EntityManager em;
 
-    private void save(User user) {
+    public void save(User user) {
         em.persist(user);
     }
 
-    private User findOne(int id) {
+    public User findOne(int id) {
         return em.find(User.class, id);
     }
 
-    private List<User> findAll() {
+    public List<User> findAll() {
         return em.createQuery("select m from User m", User.class)
                 .getResultList();
     }

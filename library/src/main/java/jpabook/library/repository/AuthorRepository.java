@@ -16,11 +16,11 @@ public class AuthorRepository {
     @PersistenceContext
     private final EntityManager em;
 
-    private void save(Author author) {
+    public void save(Author author) {
         em.persist(author);
     }
 
-    private Author findOne(int id) {
+    public Author findOne(int id) {
         return em.find(Author.class, id);
     }
 

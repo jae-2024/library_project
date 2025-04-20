@@ -15,15 +15,15 @@ public class BookRepository {
     @PersistenceContext
     private final EntityManager em;
 
-    private void save(Book book) {
+    public void save(Book book) {
         em.persist(book);
     }
 
-    private Book findOne(int id) {
+    public Book findOne(int id) {
         return em.find(Book.class, id);
     }
 
-    private List<Book> findAll() {
+    public List<Book> findAll() {
         return em.createQuery("select m from Book m", Book.class)
                 .getResultList();
     }

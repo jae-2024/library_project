@@ -15,15 +15,15 @@ public class RentalRepository {
     @PersistenceContext
     private final EntityManager em;
 
-    private void save(Rental rental) {
+    public void save(Rental rental) {
         em.persist(rental);
     }
 
-    private Rental findOne(int id) {
+    public Rental findOne(int id) {
         return em.find(Rental.class, id);
     }
 
-    private List<Rental> findAll() {
+    public List<Rental> findAll() {
         return em.createQuery("select m from Rental m", Rental.class)
                 .getResultList();
     }
