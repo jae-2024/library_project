@@ -20,7 +20,7 @@ public class Book {
     private String isbn;
     private int stock; //책 재고
     private String publisher;
-    private LocalDateTime outblished_at;
+    private LocalDateTime outblishedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
@@ -31,5 +31,5 @@ public class Book {
     private Rental rental;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    private List<Book_genre> Book_genres = new ArrayList<>();
+    private List<BookGenre> bookGenres = new ArrayList<>();
 }

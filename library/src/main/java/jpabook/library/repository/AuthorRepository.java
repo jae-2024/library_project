@@ -13,15 +13,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthorRepository {
 
-    @PersistenceContext
     private final EntityManager em;
-
-    public void save(Author author) {
-        em.persist(author);
-    }
 
     public Author findOne(int id) {
         return em.find(Author.class, id);
+    }
+
+    public List<Author> findAll() {
+        return em.createQuery("select m from Member m", Author.class)
+                .getResultList();
     }
 
     public List<Author> findByName(String name) {

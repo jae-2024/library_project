@@ -16,9 +16,9 @@ public class Rental {
     @Column(name = "rental_id")
     private int id;
 
-    private LocalDateTime rental_date;
-    private LocalDateTime deadline;
-    private LocalDateTime return_date;
+    private LocalDateTime rentalDate;
+    private LocalDateTime deadLine;
+    private LocalDateTime returnDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

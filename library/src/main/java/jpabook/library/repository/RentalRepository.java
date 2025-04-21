@@ -6,13 +6,13 @@ import jpabook.library.domain.Rental;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
 public class RentalRepository {
 
-    @PersistenceContext
     private final EntityManager em;
 
     public void save(Rental rental) {

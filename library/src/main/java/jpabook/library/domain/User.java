@@ -20,7 +20,7 @@ public class User {
     private String email;
     private String password;
     private String phone;
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Rental> rentals = new ArrayList<>();

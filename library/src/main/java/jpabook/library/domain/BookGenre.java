@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Book_genre {
+public class BookGenre {
 
     @Id @GeneratedValue
     @Column(name = "bookGenre_id")

@@ -16,5 +16,5 @@ public class Author {
     private String country;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    private List<Book> authorBooks = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
 }

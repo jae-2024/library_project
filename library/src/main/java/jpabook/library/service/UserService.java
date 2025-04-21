@@ -2,7 +2,7 @@ package jpabook.library.service;
 
 import jpabook.library.domain.User;
 import jpabook.library.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,10 +10,10 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     /**
      * 회원 가입
@@ -26,7 +26,7 @@ public class UserService {
     }
 
     private void validateDuplicateUser(User user) {
-        List<User> findUser = userRepository.findByName(User.getName());
+        List<User> findUser = userRepository.findByName(user.getName());
         if (!findUser.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
@@ -39,5 +39,14 @@ public class UserService {
 
     public User findOne(int userId) {
         return userRepository.findOne(userId);
+    }
+
+    /**
+     * 회원 업데이트 이름 변경
+     */
+    @Transactional
+    public void update(int id, String name) {
+        User user = userRepository.findOne(id);
+        user.setName(name);
     }
 }
