@@ -17,7 +17,7 @@ public class BookService {
     private final BookRepository bookRepository;
 
     /**
-     * 책 등록
+     * 책 등록 (관리자만 책을 등록할 수 있게 수정하기)
      */
     @Transactional
     public int join(Book book) {

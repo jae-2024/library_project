@@ -28,7 +28,7 @@ public class RentalService {
     }
 
     /**
-     * 반납 예정일 연장 update
+     * 반납 예정일 연장 update (최대 한 번까지 연장할 수 있게 제한하는 코드 짜기)
      */
     public void extendRentalDate(int id) {
         Rental rental = rentalRepository.findOne(id);
