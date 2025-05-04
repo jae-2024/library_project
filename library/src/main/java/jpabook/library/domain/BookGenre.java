@@ -6,11 +6,11 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Book_genre {
+public class BookGenre {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bookGenre_id")
-    private int id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
@@ -19,4 +19,14 @@ public class Book_genre {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id")
     private Genre genre;
+
+    public void setBook(Book book) {
+        this.book = book;
+        book.getBookGenres().add(this);
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+        genre.getBookGenre().add(this);
+    }
 }

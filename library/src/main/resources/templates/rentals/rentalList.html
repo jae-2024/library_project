@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+
+<div class="container">
+  <div th:replace="fragments/bodyHeader :: bodyHeader" />
+
+  <div>
+    <h2>도서 대출 목록</h2>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>대출자</th>
+        <th>대출일</th>
+        <th>상태</th>
+        <th>대출한 책</th>
+        <th>액션</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="rental : ${rentals}">
+        <td th:text="${rental.id}"></td>
+        <td th:text="${rental.user.name}"></td>
+        <td th:text="${#temporals.format(rental.rentalDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${rental.status}"></td>
+        <td>
+          <ul>
+            <li th:each="book : ${rental.rentalBooks}"
+                th:text="${book.title}">책 제목</li>
+          </ul>
+        </td>
+        <td>
+          <form th:action="@{|/rentals/delete/${rental.id}|}" method="post">
+            <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+          </form>
+          <form th:action="@{|/rentals/return/${rental.id}|}" method="post" style="display:inline"
+                th:if="${rental.status != null}">
+            <button type="submit" class="btn btn-success btn-sm">반납</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+
+</body>
+</html>

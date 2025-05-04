@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <form role="form" th:action="@{/rentals/new}" th:object="${rentalForm}" method="post">
+        <div class="form-group">
+            <label th:for="user">회원</label>
+            <select th:field="*{userId}" class="form-control">
+                <option value="">회원 선택</option>
+                <option th:each="user : ${users}"
+                        th:value="${user.id}"
+                        th:text="${user.name}"></option>
+            </select>
+            <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">회원 선택은 필수입니다.</p>
+        </div>
+
+        <div class="form-group">
+            <label th:for="books">책</label>
+            <select th:field="*{bookIds}" class="form-control" multiple>
+                <option value="">책 선택</option>
+                <option th:each="book : ${books}"
+                        th:value="${book.id}"
+                        th:text="${book.title}"></option>
+            </select>
+            <p th:if="${#fields.hasErrors('bookIds')}" th:errors="*{bookIds}">책을 하나 이상 선택해야 합니다.</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary">대여하기</button>
+    </form>
+
+    <br/>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+
+</body>
+</html>

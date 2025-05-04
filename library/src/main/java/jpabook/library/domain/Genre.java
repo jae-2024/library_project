@@ -11,13 +11,13 @@ import java.util.List;
 @Getter @Setter
 public class Genre {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "genre_id")
-    private int id;
+    private Long id;
 
-    private String genre_name;
+    private String genreName;
     private String description;
 
     @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
-    private List<Book_genre> book_genres = new ArrayList<>();
+    private List<BookGenre> bookGenre = new ArrayList<>();
 }
