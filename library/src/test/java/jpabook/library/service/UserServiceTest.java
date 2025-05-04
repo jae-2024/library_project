@@ -1,6 +1,8 @@
 package jpabook.library.service;
 
+import jakarta.persistence.EntityManager;
 import jpabook.library.domain.User;
+import jpabook.library.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,8 @@ import static org.junit.Assert.*;
 public class UserServiceTest {
 
     @Autowired UserService userService;
-    @Autowired UserService userRepository;
+    @Autowired UserRepository userRepository;
+    @Autowired EntityManager em;
 
     @Test
     public void 회원가입() throws Exception {
@@ -31,13 +34,20 @@ public class UserServiceTest {
         assertEquals(user, userRepository.findOne(savedId));
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void 중복_회원_예외() throws Exception {
         //given
+        User user1 = new User();
+        user1.setName("kim");
+
+        User user2 = new User();
+        user2.setName("kim");
 
         //when
+        userService.join(user1);
+        userService.join(user2);
 
         //then
-
+        fail("예외가 발생해야함");
     }
 }

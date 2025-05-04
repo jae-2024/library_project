@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>비밀번호</th>
+                <th>전화번호</th>
+                <th>생성날짜</th>
+                <th>역할</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.phone}"></td>
+                <td th:text="${user.createdAt}"></td>
+                <td th:text="${user.role}"></td>
+                <td>
+                    <form th:action="@{|/users/delete/${user.id}|}" method="post">
+                        <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:replace="fragments/footer :: footer" />
+
+</div> <!-- /container -->
+
+</body>
+</html>

@@ -15,11 +15,9 @@ public class BookRepository {
 
     private final EntityManager em;
 
-    public void save(Book book) {
-        em.persist(book);
-    }
+    public void save(Book book) {em.persist(book);}
 
-    public Book findOne(int id) {
+    public Book findOne(Long id) {
         return em.find(Book.class, id);
     }
 
@@ -31,6 +29,28 @@ public class BookRepository {
     public List<Book> findByName(String title) {
         return em.createQuery("select m from Book m where m.title = :title", Book.class)
                 .setParameter("title", title)
+                .getResultList();
+    }
+
+    public void deleteById(Long id) {
+        Book book = em.find(Book.class, id);
+
+        if (book != null) {
+            em.remove(book);
+        } else {
+            throw new IllegalArgumentException("책을 찾을 수 없습니다. ID: " + id);
+        }
+    }
+
+    public List<Book> findAllById(List<Long> bookIds) {
+        return em.createQuery("select b from Book b where b.id in :bookIds", Book.class)
+                .setParameter("bookIds", bookIds)
+                .getResultList();
+    }
+
+    public List<Book> findById(List<Long> ids) {
+        return em.createQuery("select b from Book b where b.id in :ids", Book.class)
+                .setParameter("ids", ids)
                 .getResultList();
     }
 }

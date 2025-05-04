@@ -19,7 +19,7 @@ public class UserService {
      * 회원 가입
      */
     @Transactional
-    public int join(User user) {
+    public Long join(User user) {
         validateDuplicateUser(user);
         userRepository.save(user);
         return user.getId();
@@ -37,7 +37,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User findOne(int userId) {
+    public User findOne(Long userId) {
         return userRepository.findOne(userId);
     }
 
@@ -45,8 +45,13 @@ public class UserService {
      * 회원 업데이트 이름 변경
      */
     @Transactional
-    public void update(int id, String name) {
+    public void update(Long id, String name) {
         User user = userRepository.findOne(id);
         user.setName(name);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        userRepository.deleteById(id);
     }
 }

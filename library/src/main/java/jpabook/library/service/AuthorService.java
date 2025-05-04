@@ -1,6 +1,7 @@
 package jpabook.library.service;
 
 import jpabook.library.domain.Author;
+import jpabook.library.domain.Rental;
 import jpabook.library.repository.AuthorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,16 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    public Author findOne(int authorId) {
+    public Author findOne(Long authorId) {
         return authorRepository.findOne(authorId);
+    }
+
+    public List<Author> findByName(String name) {
+        return authorRepository.findByName(name);
+    }
+
+    @Transactional
+    public void saveAuthor(Author author) {
+        authorRepository.save(author); // save 호출
     }
 }
