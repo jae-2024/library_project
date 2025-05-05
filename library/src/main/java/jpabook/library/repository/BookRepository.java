@@ -6,6 +6,7 @@ import jpabook.library.domain.Book;
 import jpabook.library.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class BookRepository {
 
     private final EntityManager em;
 
+    @Transactional
     public void save(Book book) {em.persist(book);}
 
     public Book findOne(Long id) {

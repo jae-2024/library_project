@@ -7,6 +7,7 @@ import jpabook.library.domain.Rental;
 import jpabook.library.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class AuthorRepository {
 
     private final EntityManager em;
 
+    @Transactional
     public void save(Author author) {
         if (author.getId() == null) {
             em.persist(author);  // 새로운 엔티티는 persist로 저장
