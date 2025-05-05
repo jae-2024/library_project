@@ -31,7 +31,6 @@ public class AuthorService {
         return authorRepository.findByName(name);
     }
 
-    @Transactional
     public void saveAuthor(Author author) {
         authorRepository.save(author); // save 호출
     }

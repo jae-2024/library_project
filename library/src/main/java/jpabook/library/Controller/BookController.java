@@ -7,6 +7,7 @@ import jpabook.library.domain.Book;
 import jpabook.library.domain.Role;
 import jpabook.library.domain.User;
 import jpabook.library.repository.AuthorRepository;
+import jpabook.library.repository.BookRepository;
 import jpabook.library.service.AuthorService;
 import jpabook.library.service.BookService;
 import jpabook.library.service.UserService;
@@ -26,7 +27,9 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+    private final BookRepository bookRepository;
     private final AuthorService authorService;
+    private final AuthorRepository authorRepository;
 
     @GetMapping("/books")
     public String bookList(Model model) {
@@ -56,7 +59,12 @@ public class BookController {
         book.setStock(form.getStock());
         book.setPublisher(form.getPublisher());
         book.setOutblishedAt(outblishedAt);
-//        book.setAuthor(author);
+
+        Author author = new Author();
+        author.setName(form.getName());
+        authorRepository.save(author);
+
+        book.setAuthor(author);
 
         bookService.join(book); // 책 저장
 

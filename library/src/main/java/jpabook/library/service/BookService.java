@@ -33,6 +33,7 @@ public class BookService {
     private void validateDuplicateBook(Book book) {
         List<Book> findBook = bookRepository.findByName(book.getTitle());
         if (!findBook.isEmpty()) {
+            System.out.println("입력 제목: '" + book.getTitle() + "'");
             throw new IllegalStateException("이미 존재하는 책입니다.");
         }
     }

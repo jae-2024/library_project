@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import jpabook.library.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +17,7 @@ public class RentalRepository {
 
     private final EntityManager em;
 
+    @Transactional
     public void save(Rental rental) {
         em.persist(rental);
     }
