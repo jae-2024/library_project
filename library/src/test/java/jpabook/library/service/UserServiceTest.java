@@ -1,8 +1,9 @@
 package jpabook.library.service;
 
 import jakarta.persistence.EntityManager;
-import jpabook.library.domain.User;
-import jpabook.library.repository.UserRepository;
+import jpabook.library.user.domain.User;
+import jpabook.library.user.repository.UserRepository;
+import jpabook.library.user.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ import static org.junit.Assert.*;
 @Transactional
 public class UserServiceTest {
 
-    @Autowired UserService userService;
+    @Autowired
+    UserService userService;
     @Autowired UserRepository userRepository;
     @Autowired EntityManager em;
 
